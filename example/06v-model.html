@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>v-model</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>v-model</h1>
+  <hr>
+  <div id="app">
+    <p> {{message}}</p>
+    <p><input type="text" v-model="message"></p>
+    <p><input type="text" v-model.lazy="message"></p>
+    <p><input type="text" v-model.number="message"></p>
+    <p><input type="text" v-model.trim="message"></p>
+    <p><textarea cols="30" rows="10" v-model="message"></textarea></p>
+    <hr>
+    <p>
+      <input type="checkbox" id="isAgree" v-model="isAgreeValue">
+      <label for="isAgree">{{isAgreeValue}}</label>
+    </p>
+    <hr>
+    <p>
+      <input type="checkbox" id="name1" value="name1" v-model="names">
+      <label for="name1">name1</label>
+      <input type="checkbox" id="name2" value="name2" v-model="names">
+      <label for="name2">name2</label>
+      <input type="checkbox" id="name3" value="name3" v-model="names">
+      <label for="name3">name3</label>
+      <p>{{names}}</p>
+    </p>
+    <hr>
+    <p>
+      <input type="radio" id="male" value="男" v-model="sex">
+      <label for="male">男</label>
+      <input type="radio" id="female" value="女" v-model="sex">
+      <label for="female">女</label>
+      <p>{{sex}}</p>
+    </p>
+  </div>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello World!',
+        isAgreeValue: false,
+        names: [],
+        sex: '男'
+      }
+    })
+  </script>
+</body>
+
+</html>

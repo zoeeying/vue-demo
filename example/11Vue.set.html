@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue.set</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue.set</h1>
+  <hr>
+  <div id="app">
+    <p>{{count}}</p>
+    <ul>
+      <li v-for="item in arr">{{item}}</li>
+    </ul>
+  </div>
+  <p><button onclick="add()">增加数字</button></p>
+  <p><button onclick="change()">改变数组中第一个元素</button></p>
+  <script type="text/javascript">
+
+    function add() {
+      // 这些方法都能实现改变count的目的
+      // Vue.set(outData, 'count', 2)
+      // Vue.set(app, 'count', 2)
+      // app.count++
+      outData.count++
+    }
+    function change() {
+      // 如果数据是引用类型的，比如数组，那么只是改变数组中某个元素，需要使用Vue.set，页面才会更新
+      // app.arr[1] = 'bbb'
+      // outData.arr[1] = 'bbb'
+      // Vue.set(outData.arr, 1, 'bbb')
+      Vue.set(app.arr, 1, 'bbb')
+    }
+
+    var outData = {
+      count: 1,
+      arr: ['111', '222', '333']
+    }
+
+    var app = new Vue({
+      el: '#app',
+      data: outData
+    })
+  </script>
+</body>
+
+</html>

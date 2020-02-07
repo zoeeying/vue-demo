@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>组件</h1>
+  <hr>
+  <div id="app">
+    <zoe></zoe>
+    <panda></panda>
+  </div>
+  <script type="text/javascript">
+    Vue.component('zoe', {
+      template: `<h4 style="color:green">全局的zoe组件</h4>`
+    })
+    var app = new Vue({
+      el: '#app',
+      components: {
+        'panda': {
+          template: `<h4 style="color:blue">局部的panda组件</h4>`
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

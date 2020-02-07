@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件4</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>组件4</h1>
+  <hr>
+  <div id="app">
+    <component :is="which"></component>
+    <button @click="changeComponent">改变组件</button>
+  </div>
+  <script type="text/javascript">
+    var aaa = {
+      template: `<h3 style="color:green">我是aaa组件</h3>`
+    }
+    var bbb = {
+      template: `<h3 style="color:red">我是bbb组件</h3>`
+    }
+    var ccc = {
+      template: `<h3 style="color:blue">我是ccc组件</h3>`
+    }
+    var app = new Vue({
+      el: '#app',
+      data: {
+        which: 'aaa',
+        count: 1,
+      },
+      components: {
+        'aaa': aaa,
+        'bbb': bbb,
+        'ccc': ccc,
+      },
+      methods: {
+        changeComponent: function () {
+          let arr = ['aaa', 'bbb', 'ccc']
+          this.which = arr[this.count % 3]
+          this.count += 1
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>v-bind</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>v-bind</h1>
+  <hr>
+  <div id="app">
+    <p>
+      <img v-bind:src="imgSrc" width="500px">
+    </p>
+    <p>
+      <a :href="blogUrl" target="_blank">小畅叙的博客</a>
+    </p>
+    <!-- :class="className"跟class="classNameA"效果一样，但是第一种方法可以使用判断 -->
+    <div :class="className">绑定一个class</div>
+    <div :class="[classNameA, classNameB]">绑定class数组</div>
+    <div :class="hasClass?classNameA:classNameB">三元运算符绑定class</div>
+    <div :style="style">绑定style对象</div>
+    <div :style="{color:color,fontSize:fontSize}">单个绑定style</div>
+    <div>
+      <input type="checkbox" id="hasClass" v-model="hasClass">
+      <label for="hasClass">默认/绿色</label>
+    </div>
+    <div :class="{classNameA: hasClass}">通过判断绑定class</div>
+  </div>
+  <style>
+    .classNameA {
+      color: lightseagreen;
+    }
+
+    .classNameB {
+      font-size: 18px;
+      color: lightsalmon;
+    }
+  </style>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        imgSrc: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580741568872&di=5f29f31301bd72ffd71fd2ec4cb253ba&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F9vo3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F0bd162d9f2d3572c2850429d8913632763d0c3c5.jpg',
+        blogUrl: 'http://zoeeying.github.io',
+        className: 'classNameA',
+        hasClass: false,
+        classNameA: 'classNameA',
+        classNameB: 'classNameB',
+        style: {
+          color: 'blue',
+          fontSize: '30px'
+        },
+        color: 'purple',
+        fontSize: '40px'
+      }
+    })
+  </script>
+</body>
+
+</html>

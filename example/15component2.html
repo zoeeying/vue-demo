@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件2</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>组件2</h1>
+  <hr>
+  <div id="app">
+    <panda here="中国" from-here="四川" :adj="adj"></panda>
+  </div>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        adj: '非常可爱'
+      },
+      components: {
+        'panda': {
+          template: `<h2 style="color:red">熊猫来自于{{here}}{{fromHere}}，{{adj}}</h2>`,
+          props: ['here', 'fromHere', 'adj'] // 使用props选项注册属性
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>v-if&v-else&v-show</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>v-if&v-else&v-show</h1>
+  <hr>
+  <div id="app">
+    <!-- v-if和v-else必须成对出现 -->
+    <!-- v-if里面的变量如果为false，是不会加载这个dom的，而v-show里面的变量如果为false，dom还是加载的，只是设置样式中display为none了 -->
+    <div v-if="isLogin">你好，小畅叙！</div>
+    <div v-else>请登录！</div>
+    <div v-show="isLogin">小畅叙有没有显示？</div>
+  </div>
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        isLogin: true
+      }
+    })
+  </script>
+</body>
+
+</html>
