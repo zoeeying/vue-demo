@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>methods</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>methods</h1>
+  <hr>
+  <div id="app">
+    <p>计数：{{count}}</p>
+    <!-- 传递参数，$event是Vue内置的事件对象，包含所有与事件有关的信息 -->
+    <button @click="add(5, $event)">按钮</button>
+    <p>
+      <!-- 自定义组件通过@click.native调用methods选项中的方法 -->
+      <mybtn @click.native="add(2, $event)"></mybtn>
+    </p>
+  </div>
+  <!-- Vue作用域外部按钮调用methods选项中的方法，注意没有$event参数 -->
+  <button onclick="app.add(3)">外部按钮</button>
+  <script type="text/javascript">
+    var mybtn = {
+      template: `<button>自定义按钮</button>`
+    }
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 0
+      },
+      components: {
+        'mybtn': mybtn
+      },
+      methods: {
+        add: function (num, e) {
+          this.count += (typeof num === 'number' ? num : 1)
+          console.log(e)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

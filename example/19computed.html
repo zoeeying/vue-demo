@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>computed</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>computed</h1>
+  <hr>
+  <div id="app">
+    <p>{{formatPrice}}</p>
+    <ul>
+      <li v-for="item in reversedNewsList">{{item.date}}-{{item.title}}</li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    var newsList = [
+      { title: '周杰捐2万斤大米', date: '2020年2月3日' },
+      { title: '女篮进军奥运会', date: '2020年2月4日' },
+      { title: '穿山甲为中间宿主', date: '2020年2月5日' },
+      { title: '浙江确诊病例破千', date: '2020年2月6日' },
+      { title: '央视元宵特别节目', date: '2020年2月8日' },
+    ]
+    var app = new Vue({
+      el: '#app',
+      data: {
+        price: 100,
+        newsList,
+      },
+      computed: {
+        formatPrice: function () {
+          return '￥' + this.price + '元'
+        },
+        reversedNewsList: function () {
+          return this.newsList.reverse()
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

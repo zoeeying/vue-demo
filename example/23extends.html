@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>extends</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>extends</h1>
+  <hr>
+  <div id="app">
+    <!-- <p>{{num}}</p> -->
+    <p>${num}</p>
+    <button @click="add">增加</button>
+  </div>
+  <script type="text/javascript">
+    var extendsObj = {
+      updated: function () {
+        console.log('扩展的updated')
+      },
+      methods: {
+        // 扩展的方法如果与构造器中的方法名重复，是不会执行的
+        add: function () {
+          this.num++
+          console.log('扩展的add方法')
+        }
+      },
+    }
+    var app = new Vue({
+      el: '#app',
+      data: {
+        num: 1
+      },
+      methods: {
+        add: function () {
+          this.num++
+          console.log('构造器中的add方法')
+        }
+      },
+      updated: function () {
+        console.log('构造器中的updated')
+      },
+      extends: extendsObj,
+      delimiters: ['${', '}']
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mixins</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>mixins</h1>
+  <hr>
+  <div id="app">
+    <p>{{num}}</p>
+    <button @click="add">增加</button>
+  </div>
+  <script type="text/javascript">
+    var addMixins = {
+      // updated是生命周期函数
+      updated: function () {
+        console.log('数据发生了变化，变成了' + this.num)
+      }
+    }
+    // 对于公共方法，可以使用全局混入
+    Vue.mixin({
+      updated: function () {
+        console.log('全局混入')
+      }
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        num: 1
+      },
+      methods: {
+        add: function () {
+          this.num++
+        }
+      },
+      updated: function () {
+        console.log('构造器中的updated')
+      },
+      mixins: [addMixins]
+    })
+  </script>
+</body>
+
+</html>

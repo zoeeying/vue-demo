@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>propsData</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+  <h1>propsData</h1>
+  <hr>
+  <zoe></zoe>
+  <script type="text/javascript">
+    var zoeExtend = Vue.extend({
+      template: "<p>{{message}}! {{extra}}!</p>",
+      data: function () {
+        return ({
+          message: 'Hello Zoe',
+        })
+      },
+      props: ['extra']
+    })
+    new zoeExtend({ propsData: { extra: 'I am Tyler' } }).$mount('zoe')
+  </script>
+</body>
+
+</html>
