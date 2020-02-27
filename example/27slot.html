@@ -1,60 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>内置组件slot</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>内置组件slot</title>
-  <script type="text/javascript" src="../assets/js/vue.js"></script>
-</head>
-
-<body>
-  <h1>内置组件slot</h1>
-  <hr>
-  <div id="app">
-    <zoe>
-      <!-- 传递值，这里也可以不用构造器中的data，直接传递个字符串值 -->
-      <!-- <span slot="url">http://zoeeying.github.io</span> -->
-      <span slot="url">{{blogData.url}}</span>
-      <span slot="name">{{blogData.name}}</span>
-      <span slot="description">{{blogData.description}}</span>
-    </zoe>
-  </div>
-  <template id="myBlog">
-    <div>
-      <p>
-        <span>博客地址：</span>
-        <!-- 接收并显示值 -->
-        <slot name="url"></slot>
-      </p>
-      <p>
-        <span>博客名称：</span>
-        <slot name="name"></slot>
-      </p>
-      <p>
-        <span>博客描述：</span>
-        <slot name="description"></slot>
-      </p>
+  <body>
+    <h1>内置组件slot</h1>
+    <hr />
+    <div id="app">
+      <zoe>
+        <!-- 传递值，这里也可以不用构造器中的data，直接传递个字符串值 -->
+        <!-- <span slot="url">http://zoeeying.github.io</span> -->
+        <span slot="url">{{blogData.url}}</span>
+        <span slot="name">{{blogData.name}}</span>
+        <span slot="description">{{blogData.description}}</span>
+      </zoe>
     </div>
-  </template>
-  <script type="text/javascript">
-    var app = new Vue({
-      el: '#app',
-      data: {
-        blogData: {
-          url: 'http://zoeeying.github.io',
-          name: '小畅叙的博客',
-          description: '黑客与画家',
+    <template id="myBlog">
+      <div>
+        <p>
+          <span>博客地址：</span>
+          <!-- 接收并显示值 -->
+          <slot name="url"></slot>
+        </p>
+        <p>
+          <span>博客名称：</span>
+          <slot name="name"></slot>
+        </p>
+        <p>
+          <span>博客描述：</span>
+          <slot name="description"></slot>
+        </p>
+      </div>
+    </template>
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#app',
+        data: {
+          blogData: {
+            url: 'http://zoeeying.github.io',
+            name: '小畅叙的博客',
+            description: '黑客与画家'
+          }
         },
-      },
-      components: {
-        'zoe': {
-          template: '#myBlog'
+        components: {
+          zoe: {
+            template: '#myBlog'
+          }
         }
-      }
-    })
-  </script>
-</body>
-
+      })
+    </script>
+  </body>
 </html>

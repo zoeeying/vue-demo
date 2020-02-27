@@ -1,67 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>实例事件</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>实例事件</title>
-  <script type="text/javascript" src="../assets/js/vue.js"></script>
-</head>
+  <body>
+    <h1>实例事件</h1>
+    <hr />
+    <div id="app">
+      <div>{{count}}</div>
+      <p>
+        <button @click="add">add</button>
+        <!-- reduce是实例上的自定义事件，所以下面的方式会报错，必须写在onclick中 -->
+        <!-- <button @click="reduce">reduce</button> -->
+        <br />
+        <br />
+        <button onclick="reduce()">reduce</button>
+        <button onclick="app.$emit('reduceOnce')">reduceOnce</button>
+        <button onclick="off()">off</button>
+      </p>
+    </div>
 
-<body>
-  <h1>实例事件</h1>
-  <hr>
-  <div id="app">
-    <div>{{count}}</div>
-    <p>
-      <button @click="add">add</button>
-      <!-- 下面的方式是不可以的，报错 -->
-      <!-- <button @click="reduce">reduce</button> -->
-    </p>
-  </div>
-  <button onclick="reduce()">reduce</button>
-  <button onclick="reduceOnce()">reduceOnce</button>
-  <button onclick="off()">off</button>
-  <script type="text/javascript">
-    var app = new Vue({
-      el: '#app',
-      data: {
-        count: 1
-      },
-      methods: {
-        add: function () {
-          this.count++
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#app',
+        data: {
+          count: 1
+        },
+        methods: {
+          add: function() {
+            this.count++
+          }
         }
-      },
-    })
+      })
 
-    // 在构造器外部添加事件函数
-    app.$on('reduce', function () {
-      this.count--
-    })
+      // 在构造器外部添加事件函数
+      app.$on('reduce', function() {
+        this.count--
+      })
 
-    // 只能执行一次的事件函数
-    app.$once('reduceOnce', function () {
-      this.count--
-    })
+      // 只能执行一次的事件函数
+      app.$once('reduceOnce', function() {
+        this.count--
+      })
 
-    // 外部调用内部事件，不能直接使用app.reduce()
-    // app.add()可以使用
-    function reduce() {
-      // app.reduce() // 报错
-      app.$emit('reduce')
-    }
+      function reduce() {
+        // app.reduce() // 报错
+        // app.add()可以使用
+        // 触发当前实例上的事件，必须使用$emit
+        app.$emit('reduce')
+      }
 
-    function reduceOnce() {
-      app.$emit('reduceOnce')
-    }
+      // 可以不另外声明reduceOnce函数，直接在onclick中写
+      // function reduceOnce() {
+      //   app.$emit('reduceOnce')
+      // }
 
-    // 关闭reduce事件
-    function off() {
-      app.$off('reduce')
-    }
-  </script>
-</body>
-
+      // 关闭reduce事件
+      function off() {
+        app.$off('reduce')
+      }
+    </script>
+  </body>
 </html>
