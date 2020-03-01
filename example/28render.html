@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>render</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>render</h1>
+    <hr />
+    <div id="app">
+      <zoe></zoe>
+    </div>
+    <script type="text/javascript">
+      // Vue.component('zoe', {
+      //   template: `<h4 style="color:green">ZOE</h4>`
+      // })
+
+      // 使用render函数改写，h是一个创建标签的函数
+      // Vue.component('zoe', {
+      //   render(h) {
+      //     return h(
+      //       'h4',
+      //       {
+      //         style: { color: 'green' }
+      //       },
+      //       'ZOE'
+      //     )
+      //   }
+      // })
+
+      // const tyler = Vue.component('tyler', {
+      //   template: '<input/>'
+      // })
+      // const tyler = Vue.component('tyler', {
+      //   template: '<input/>'
+      // })
+      // Vue.component('zoe', {
+      //   render: h => h(tyler)
+      // })
+      // var app = new Vue({
+      //   el: '#app',
+      // })
+
+      // const tyler = Vue.component('tyler', {
+      //   template: '<input/>'
+      // })
+      // var app = new Vue({
+      //   el: '#app',
+      //   // template: '<tyler></tyler>',
+      //   render: h => h(tyler)
+      // })
+
+      const tyler = {
+        template: '<input/>'
+      }
+      var app = new Vue({
+        el: '#app',
+        components: { tyler },
+        template: '<tyler></tyler>'
+      })
+    </script>
+  </body>
+</html>

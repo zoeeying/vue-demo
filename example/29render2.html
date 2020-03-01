@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>render</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>render</h1>
+    <hr />
+    <div id="app">
+      <zoe url="http://baidu.com" level="1" val="我是输入框中的内容">百度</zoe>
+    </div>
+    <script type="text/javascript">
+      Vue.component('iii', {
+        props: ['val'],
+        template: '<input v-model="val"/>'
+      })
+      Vue.component('zoe', {
+        props: ['url', 'level', 'val'],
+        // 注意这里不要使用箭头函数，因为要使用this
+        // 为什么使用this.level呢？？？
+        render(h) {
+          return h('h' + this.level, [
+            h(
+              'a',
+              {
+                style: { color: 'red' },
+                domProps: { href: this.url }
+              },
+              // this.$slots表示所有插槽
+              [
+                h('button', this.$slots.default),
+                h('iii', {
+                  props: {
+                    val: this.val
+                  }
+                })
+              ]
+            )
+          ])
+        }
+        // template: `
+        //   <div>
+        //     <h1 v-if="level===1">
+        //       <a :href="url">
+        //         <slot></slot>
+        //       </a>
+        //     </h1>
+        //     <h2 v-if="level===2">
+        //       <a :href="url">
+        //         <slot></slot>
+        //       </a>
+        //     </h2>
+        //     <h3 v-if="level===3">
+        //       <a :href="url">
+        //         <slot></slot>
+        //       </a>
+        //     </h3>
+        //   </div>
+        // `
+      })
+      var app = new Vue({
+        el: '#app'
+      })
+    </script>
+  </body>
+</html>

@@ -13,11 +13,16 @@
     <hr />
     <div id="app">
       <zoe>
-        <!-- 传递值，这里也可以不用构造器中的data，直接传递个字符串值 -->
-        <!-- <span slot="url">http://zoeeying.github.io</span> -->
-        <span slot="url">{{blogData.url}}</span>
-        <span slot="name">{{blogData.name}}</span>
-        <span slot="description">{{blogData.description}}</span>
+        <template v-slot:url>
+          <span>{{blogData.url}}</span>
+        </template>
+        <template v-slot:name>
+          <span>{{blogData.name}}</span>
+        </template>
+        <template v-slot:description="slotProps">
+          <span>{{blogData.description}}{{slotProps.others}}</span>
+        </template>
+        其它信息
       </zoe>
     </div>
     <template id="myBlog">
@@ -33,7 +38,11 @@
         </p>
         <p>
           <span>博客描述：</span>
-          <slot name="description"></slot>
+          <slot name="description" v-bind:others="others"></slot>
+        </p>
+        <p>
+          <span>其它信息：</span>
+          <slot></slot>
         </p>
       </div>
     </template>
@@ -49,6 +58,11 @@
         },
         components: {
           zoe: {
+            data() {
+              return {
+                others: '，小畅叙的学习笔记'
+              }
+            },
             template: '#myBlog'
           }
         }

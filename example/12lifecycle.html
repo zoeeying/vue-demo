@@ -1,67 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>生命周期</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>生命周期</title>
-  <script type="text/javascript" src="../assets/js/vue.js"></script>
-</head>
-
-<body>
-  <h1>生命周期</h1>
-  <hr>
-  <div id="app">
-    <div>{{count}}</div>
-    <p><button @click="add">增加</button></p>
-  </div>
-  <button onclick="app.$destroy()">销毁</button>
-  <script type="text/javascript">
-    var app = new Vue({
-      el: '#app',
-      data: {
-        count: 1
-      },
-      methods: {
-        add: function () {
-          this.count++
+  <body>
+    <h1>生命周期</h1>
+    <hr />
+    <div id="app">
+      <div>{{count}}</div>
+      <p><button @click="add">增加</button></p>
+    </div>
+    <button onclick="app.$destroy()">销毁</button>
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#app',
+        data: {
+          count: 1
+        },
+        methods: {
+          add: function() {
+            this.count++
+          }
+        },
+        beforeCreate: function() {
+          console.log('1-beforeCreate 创建之前')
+        },
+        created: function() {
+          // 可以在这里加载loading动画
+          console.log('2-created 创建完成')
+        },
+        beforeMount: function() {
+          console.log('3-beforeMount 被挂载之前')
+        },
+        mounted: function() {
+          // 可以在这里结束loading动画，显示正常页面
+          console.log('4-mounted 被挂载之后')
+        },
+        beforeUpdate: function() {
+          console.log('5-beforeUpdate 更新前')
+        },
+        updated: function() {
+          console.log('6-updated 更新后')
+        },
+        activated: function() {
+          console.log('7-activated')
+        },
+        deactivated: function() {
+          console.log('8-deactivated')
+        },
+        beforeDestroy: function() {
+          console.log('9-beforeDestroy 销毁之前')
+        },
+        destroyed: function() {
+          console.log('10-destroyed 销毁之后')
         }
-      },
-      beforeCreate: function () {
-        console.log('1-beforeCreate 创建之前');
-      },
-      created: function () {
-        // 可以在这里加载loading动画
-        console.log('2-created 创建完成');
-      },
-      beforeMount: function () {
-        console.log('3-beforeMount 被挂载之前');
-      },
-      mounted: function () {
-        // 可以在这里结束loading动画，显示正常页面
-        console.log('4-mounted 被挂载之后');
-      },
-      beforeUpdate: function () {
-        console.log('5-beforeUpdate 更新前');
-      },
-      updated: function () {
-        console.log('6-updated 更新后');
-      },
-      activated: function () {
-        console.log('7-activated');
-      },
-      deactivated: function () {
-        console.log('8-deactivated');
-      },
-      beforeDestroy: function () {
-        console.log('9-beforeDestroy 销毁之前');
-      },
-      destroyed: function () {
-        console.log('10-destroyed 销毁之后')
-      }
-    })
-  </script>
-</body>
-
+      })
+    </script>
+  </body>
 </html>
