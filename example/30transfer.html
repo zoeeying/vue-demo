@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>render</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>父子、兄弟、跨级组件传值</h1>
+    <div id="app">
+      <aaa></aaa>
+      <bbb></bbb>
+      <ccc></ccc>
+    </div>
+    <template id="aaa">
+      <div>
+        <h4>我是aaa组件，我有name：{{name}}</h4>
+        <button @click="send">把数据发送给ccc组件</button>
+      </div>
+    </template>
+    <template id="bbb">
+      <div>
+        <h4>我是bbb组件，我有nickname：{{nickname}}</h4>
+        <button @click="send">把数据发送给ccc组件</button>
+      </div>
+    </template>
+    <template id="ccc">
+      <div>
+        <h4>我是ccc组件</h4>
+        <p>我接收到了aaa组件传过来的name：{{name}}</p>
+        <p>我接收到了bbb组件传过来的nickname：{{nickname}}</p>
+      </div>
+    </template>
+    <script type="text/javascript">
+      const Event = new Vue()
+      const aaa = {
+        template: '#aaa',
+        data() {
+          return {
+            name: '周颖'
+          }
+        },
+        methods: {
+          send() {
+            Event.$emit('aaaSend', this.name)
+          }
+        }
+      }
+      const bbb = {
+        template: '#bbb',
+        data() {
+          return {
+            nickname: '小畅叙'
+          }
+        },
+        methods: {
+          send() {
+            Event.$emit('bbbSend', this.nickname)
+          }
+        }
+      }
+      const ccc = {
+        template: '#ccc',
+        data() {
+          return {
+            name: '',
+            nickname: ''
+          }
+        },
+        mounted() {
+          Event.$on('aaaSend', name => {
+            this.name = name
+          })
+          Event.$on('bbbSend', nickname => {
+            this.nickname = nickname
+          })
+        }
+      }
+      var app = new Vue({
+        el: '#app',
+        components: { aaa, bbb, ccc }
+      })
+    </script>
+  </body>
+</html>

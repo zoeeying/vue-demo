@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件3</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>组件3</title>
-  <script type="text/javascript" src="../assets/js/vue.js"></script>
-</head>
-
-<body>
-  <h1>组件3</h1>
-  <hr>
-  <div id="app">
-    <panda></panda>
-  </div>
-  <script type="text/javascript">
-    var child = {
-      template: `<h6 style="color:green">我是子组件</h6>`
-    }
-    // 在构造器外部写局部组件
-    var pandaComponent = {
-      template: `
-        <div>
-          <h4 style="color:blue">局部的panda组件</h4>
-          <child></child>
-        </div> 
-      `,
-      components: {
-        'child': child,
+  <body>
+    <h1>组件3</h1>
+    <hr />
+    <div id="app">
+      <parent></parent>
+    </div>
+    <script type="text/javascript">
+      var child = {
+        template: `
+          <h3 style="color:green">我是子组件，我接收了父组件传过来的值{{username}}</h3>
+        `,
+        props: ['username']
       }
-    }
-
-    var app = new Vue({
-      el: '#app',
-      components: {
-        'panda': pandaComponent
+      var parent = {
+        template: `
+          <div>
+            <h1 style="color:blue">我是父组件</h1>
+            <child v-bind:username="username"></child>
+          </div> 
+        `,
+        data() {
+          return {
+            username: 'zoeeying'
+          }
+        },
+        components: { child }
       }
-    })
-  </script>
-</body>
 
+      var app = new Vue({
+        el: '#app',
+        components: { parent }
+      })
+    </script>
+  </body>
 </html>
