@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>$ref</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>$ref</h1>
+    <div id="app">
+      <zoe ref="zoeRef">
+        <p>我是小畅叙吖</p>
+      </zoe>
+    </div>
+    <template id="zoe">
+      <div><slot></slot></div>
+    </template>
+    <script type="text/javascript">
+      const zoe = {
+        template: '#zoe',
+        data() {
+          return {
+            name: 'Zoe'
+          }
+        },
+        methods: {
+          sayHello() {
+            alert('Hello Zoe')
+          }
+        }
+      }
+
+      var app = new Vue({
+        el: '#app',
+        components: { zoe },
+        mounted() {
+          const zoeRef = this.$refs.zoeRef
+          console.log(zoeRef.name)
+          zoeRef.sayHello()
+        }
+      })
+    </script>
+  </body>
+</html>
