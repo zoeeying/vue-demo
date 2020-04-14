@@ -1,61 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<div id="app"></div>
+<p>
+  <button onclick="destroy()">销毁</button>
+  <button onclick="reload()">刷新</button>
+  <button onclick="tick()">修改数据</button>
+</p>
+<script type="text/javascript">
+  var zoeExtend = Vue.extend({
+    template: "<p><a :href='zoeUrl'>{{zoeName}}</a></p>",
+    data() {
+      return {
+        zoeUrl: 'https://zoeeying.github.io',
+        zoeName: '小畅叙',
+      }
+    },
+    // 扩展中的生命周期同构造器
+    mounted() {
+      console.log('扩展被挂载了')
+    },
+    destroyed() {
+      console.log('扩展被销毁了')
+    },
+    updated() {
+      console.log('扩展被更新了')
+    },
+  })
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>实例方法</title>
-  <script type="text/javascript" src="../assets/js/vue.js"></script>
-</head>
+  // 创建并挂载到#app（会替换#app）
+  var vm = new zoeExtend().$mount('#app')
+  // 同上
+  // var vm = new zoeExtend({ el: '#app' })
+  // 或者，在文档之外渲染并且随后挂载
+  // var component = new zoeExtend().$mount()
+  // document.getElementById('app').appendChild(component.$el)
 
-<body>
-  <h1>实例方法</h1>
-  <hr>
-  <div id="app"></div>
-  <p>
-    <button onclick="destroy()">销毁</button>
-    <button onclick="reload()">刷新</button>
-    <button onclick="tick()">修改数据</button>
-  </p>
-  <script type="text/javascript">
-    var zoeExtend = Vue.extend({
-      template: "<p><a :href='zoeUrl'>{{zoeName}}</a></p>",
-      data() {
-        return ({
-          zoeUrl: 'https://zoeeying.github.io',
-          zoeName: '小畅叙'
-        })
-      },
-      // 扩展中的生命周期同构造器
-      mounted() {
-        console.log('扩展被挂载了')
-      },
-      destroyed() {
-        console.log('扩展被销毁了')
-      },
-      updated() {
-        console.log('扩展被更新了')
-      },
+  function destroy() {
+    vm.$destroy()
+  }
+  function reload() {
+    vm.$forceUpdate()
+  }
+  function tick() {
+    // 修改数据
+    vm.zoeName = '无敌小畅叙'
+    // DOM还没有更新
+    vm.$nextTick(function () {
+      // DOM现在更新了
+      vm.doSomethingElse()
     })
-
-    var vm = new zoeExtend().$mount('#app')
-
-    function destroy() {
-      vm.$destroy()
-    }
-
-    function reload() {
-      vm.$forceUpdate()
-    }
-
-    function tick() {
-      vm.zoeName = '无敌小畅叙'
-      vm.$nextTick(() => {
-        console.log('数据修改后的回调')
-      })
-    }
-  </script>
-</body>
-
-</html>
+  }
+</script>
